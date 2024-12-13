@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Sorting</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Employee Details</h1>
 
+  <script>
+    // Function to fetch employee data asynchronously
+    async function fetchEmployeeData() {
+      try {
+        // Using fetch to get the data (assuming the file is named 'employees.json')
+        const response = await fetch('employees.json');
+        
+        // Check if the response is successful
+        if (!response.ok) {
+          throw new Error('Failed to fetch employee data');
+        }
+
+        // Parse the JSON data
+        const data = await response.json();
+        
+        // Sort the employee data by age in ascending order
+        data.sort((a, b) => a.age - b.age);
+        
+        // Log the sorted list of employees to the console
+        console.log('Sorted Employee List (by Age):');
+        console.table(data);  // Using console.table for better readability
+      } catch (error) {
+        console.error('Error fetching or processing the employee data:', error);
+      }
+    }
+
+    // Call the function to fetch and sort employee data
+    fetchEmployeeData();
+  </script>
 </body>
-
 </html>
